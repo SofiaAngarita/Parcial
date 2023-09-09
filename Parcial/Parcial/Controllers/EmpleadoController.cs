@@ -1,4 +1,5 @@
 ﻿using data.repositorio;
+using data.Repositorio;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using model;
@@ -10,20 +11,20 @@ namespace Parcial.Controllers
     [ApiController]
     public class EmpleadoController: ControllerBase
     {
-        public class iEmpleadoRepository _EmpleadoRepository;
+        public readonly iEmpleadoRepository _EmpleadoRepository;
         public EmpleadoController(iEmpleadoRepository EmpleadoRepository)
         {
             _EmpleadoRepository = EmpleadoRepository;
         }
         [HttpGet]
-        public async Task<IActionResult> getEmpleado()
+        public async Task<IActionResult> GetEmpleado()
         {
-            return Ok(await _EmpleadoRepository.getEmpleado());
+            return Ok(await _EmpleadoRepository.GetEmpleado());
         }
         [HttpGet("{id}")]
         public async Task<IActionResult> getEmpleadobyId(int id)
         {
-            return Ok(await _EmpleadoRepository.getEmpleadoById(id));
+            return Ok(await _EmpleadoRepository.GetEmpleadoById(id));
         }
         [HttpPost]
         public async Task<IActionResult> InsertEmpleado([FromBody] Empleado empleado)
@@ -36,7 +37,7 @@ namespace Parcial.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var created = await _EmpleadoRepository.insertEmpelado(empleado);
+            var created = await _EmpleadoRepository.InsertEmpleado(empleado);
             return Ok(created);
         }
         [HttpPut]

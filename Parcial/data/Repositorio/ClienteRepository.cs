@@ -23,7 +23,7 @@ namespace data.repositorio
         public async Task<bool> deleteCliente(int id)
         {
             var db = dbConnection();
-            var sql = @"delete from clientes where idClientes = @Id";
+            var sql = @"delete from cliente where idCliente = @Id";
             var result = await db.ExecuteAsync(sql, new { id });
             return result > 0;
         }
@@ -33,14 +33,14 @@ namespace data.repositorio
         public async Task<Cliente> getClienteById(int id)
         {
             var db = dbConnection();
-            var consulta = @"select * from clientes where idClientes = @Id";
+            var consulta = @"select * from cliente where idClientes = @Id";
             return await db.QueryFirstOrDefaultAsync<Cliente>(consulta, new { Id = id });
         }
-        public async Task<Cliente> getCliente()
+        public async Task<IEnumerable<Cliente>> getCliente()
         {
             var db = dbConnection();
-            var consulta = @"select * from clientes";
-            return await db.QueryFirstOrDefaultAsync<Cliente>(consulta);
+            var consulta = @"select * from cliente";
+            return await db.QueryAsync<Cliente>(consulta);
         }
 
 
@@ -48,7 +48,7 @@ namespace data.repositorio
         public async Task<bool> InsertCliente(Cliente cliente)
         {
             var db = dbConnection();
-            var sql = @"insert into clientes(Nombre,Telefono, CorreoElectronico) values (@Nombre,@Telefono,@CorreoElectronico)";
+            var sql = @"insert into cliente(Nombre,Telefono, CorreoElectronico) values (@Nombre,@Telefono,@CorreoElectronico)";
             var result = await db.ExecuteAsync(sql, new { cliente.Nombre, cliente.Telefono, cliente.CorreoElectronico });
 
 
@@ -59,7 +59,7 @@ namespace data.repositorio
         public async Task<bool> UpdateCliente(Cliente cliente)
         {
             var db = dbConnection();
-            var sql = @"update clientes set Nombre=@Nombre,Telefono=@Telefono,CorreoElectronico=@CorreoElectronico";
+            var sql = @"update cliente set Nombre=@Nombre,Telefono=@Telefono,CorreoElectronico=@CorreoElectronico";
             var result = await db.ExecuteAsync(sql, new { cliente.Nombre, cliente.Telefono, cliente.CorreoElectronico });
 
 

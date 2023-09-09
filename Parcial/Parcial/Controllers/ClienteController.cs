@@ -9,7 +9,7 @@ namespace Parcial.Controllers
     [ApiController]
     public class ClienteController : ControllerBase
     {
-        public readonly iClienteRepository _clienteRepsitory;
+        public readonly iClienteRepository _ClienteRepository;
         public ClienteController(iClienteRepository ClienteRepository)
         {
             _ClienteRepository = ClienteRepository;
@@ -35,7 +35,7 @@ namespace Parcial.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var created = await _ClienteRepository.insertCliente(cliente);
+            var created = await _ClienteRepository.InsertCliente(cliente);
             return Ok(created);
         }
         [HttpPut]
@@ -49,7 +49,7 @@ namespace Parcial.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var update = await _ClienteRepository.updateCliente(cliente);
+            var update = await _ClienteRepository.UpdateCliente(cliente);
             return Ok(update);
         }
         [HttpDelete]

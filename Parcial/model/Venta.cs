@@ -6,9 +6,13 @@ using System.Threading.Tasks;
 
 namespace model
 {
-    internal class Venta
+    public class Venta
     {
         public int idVenta { get; set; }
-        public 
+        public DateTime FechaVenta { get; set; }
+        public int Empleado_idEmpleado { get; set; }
+        public int Cliente_idCliente { get; set; }
+        public int Seguro_idSeguro { get; set; }
+
     }
 }

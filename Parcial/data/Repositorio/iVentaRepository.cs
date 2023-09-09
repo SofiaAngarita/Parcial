@@ -7,12 +7,8 @@ using System.Threading.Tasks;
 
 namespace data.Repositorio
 {
-    public class iVentaRepository
+    public interface iVentaRepository
     {
-        Task<IEnumerable<Venta>> get();
-        Task<Venta> getVentaById(int id);
         Task<bool> InsertVenta(Venta venta);
-        Task<bool> UpdateVenta(Venta venta);
-        Task<bool> deleteVenta(int id);
     }
 }

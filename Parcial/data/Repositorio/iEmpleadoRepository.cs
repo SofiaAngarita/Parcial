@@ -9,10 +9,10 @@ namespace data.Repositorio
 {
     public interface iEmpleadoRepository
     {
-        Task<IEnumerable<Empleado>> get();
-        Task<Empleado> getEmpleadoById(int id);
+        Task<IEnumerable<Empleado>> GetEmpleado();
+        Task<Empleado> GetEmpleadoById(int id);
         Task<bool> InsertEmpleado(Empleado empleado);
-        Task<bool> UpdateEmpleado(Empleado empleado);
+        Task<bool> updateEmpleado(Empleado empleado);
         Task<bool> deleteEmpleado(int id);
     }
 }
