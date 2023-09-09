@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace model
+namespace data.Repositorio
 {
-    internal class Seguro
+    internal class VentaRepository
     {
     }
 }

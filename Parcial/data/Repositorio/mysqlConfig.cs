@@ -1,7 +1,18 @@
-﻿namespace data.repositorio
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace data.repositorio
 {
     public class mysqlConfig
     {
-        internal object _connectionString;
+        public string _connectionString;
+        public mysqlConfig(string connectionString) 
+        {
+            _connectionString = connectionString;
+        }
+
     }
 }

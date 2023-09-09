@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace model
 {
-    internal class Empleado
+    public class Empleado
     {
+        public int ID { get; set; }
+        public string Nombre { get; set; }
+        public int Telefono { get; set; }
+        public string CorreoElectronico { get; set; }
     }
 }

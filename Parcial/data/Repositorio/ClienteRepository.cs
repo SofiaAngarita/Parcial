@@ -1,4 +1,6 @@
-﻿using model;
+﻿using Dapper;
+using model;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace data.repositorio
 {
-    public class clienteRepository : iClienteRepository
+    public class ClienteRepository : iClienteRepository
     {
         public readonly mysqlConfig _connection;
-        public clienteRepository(mysqlConfig connection)
+        public ClienteRepository(mysqlConfig connection)
         {
             _connection = connection;
         }
@@ -28,20 +30,17 @@ namespace data.repositorio
 
 
 
-        public Task<Cliente> getClienteById(int id)
+        public async Task<Cliente> getClienteById(int id)
         {
             var db = dbConnection();
             var consulta = @"select * from clientes where idClientes = @Id";
-            return db.QueryFirstOrDefaultAsync<Cliente>(consulta, new { Id = id });
+            return await db.QueryFirstOrDefaultAsync<Cliente>(consulta, new { Id = id });
         }
-
-
-
-        public Task<IEnumerable<Cliente>> getClientes()
+        public async Task<Cliente> getCliente()
         {
             var db = dbConnection();
             var consulta = @"select * from clientes";
-            return db.QueryAsync<Cliente>(consulta);
+            return await db.QueryFirstOrDefaultAsync<Cliente>(consulta);
         }
 
 

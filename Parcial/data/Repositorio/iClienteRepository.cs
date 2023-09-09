@@ -9,7 +9,7 @@ namespace data.repositorio
 {
     public interface iClienteRepository
     {
-        Task<IEnumerable<Cliente>> getClientes();
+        Task<IEnumerable<Cliente>> getCliente();
         Task<Cliente> getClienteById(int id);
         Task<bool> InsertCliente(Cliente cliente);
         Task<bool> UpdateCliente(Cliente cliente);

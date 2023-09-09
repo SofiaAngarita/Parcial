@@ -1,9 +1,13 @@
-﻿using data.Repositorio;
+﻿
+using model;
+using data.Repositorio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MySql.Data.MySqlClient;
+using Dapper;
 
 namespace data.repositorio
 {
@@ -26,32 +30,32 @@ namespace data.repositorio
             return result > 0;
         }
 
-        public Task<Empleado> GetEmpleadoById(int id, MySqlConnection db)
+        public async Task<Empleado> GetEmpleadoById(int id, MySqlConnection db)
         {
             MySqlConnection mySqlConnection = dbConnection();
             var db = mySqlConnection;
             var consulta = @"select * from conductores where idConductores = @Id";
-            return db.QueryFirstOrDefaultAsync<Empleado>(consulta, new { Id = id });
+            return await db.QueryFirstOrDefaultAsync<Empleado>(consulta, new { Id = id });
         }
-        public Task<IEnumerable<Empleado>> getEmpleado()
+        public Task<IEnumerable<Empleado>> GetEmpleado()
         {
             var db = dbConnection();
             var consulta = @"select * from conductores";
             return db.QueryAsync<Empleado>(consulta);
         }
-        public async Task<bool> insertEmpleado(Empleado conductor)
+        public async Task<bool> InsertEmpleado(Empleado empleado)
         {
             var db = dbConnection();
-            var sql = @"insert into conductores(Documento,Nombre,disponibilidad,placa,modelo,licencia,Foto,TipoDoc_idTipoDoc) values(@Documento,@Nombre,@disponibilidad,@placa,@modelo,@licencia,@Foto,@tipoDoc)";
-            var result = await db.ExecuteAsync(sql, new { conductor.documento, conductor.nombre, conductor.disponibilidad, conductor.placa, conductor.modelo, conductor.licencia, conductor.foto, conductor.tipoDoc });
+            var sql = @"insert into conductores(Nombre, Telefono, CorreoElectronico ) values ( @Nombre, @Telefono, @CorreoElectronico )";
+            var result = await db.ExecuteAsync(sql, new { empleado.Nombre, empleado.Telefono, empleado.CorreoElectronico });
 
             return result > 0;
         }
-        public async Task<bool> updateConductor(Empleado conductor)
+        public async Task<bool> updateEmpleado(Empleado empleado)
         {
             var db = dbConnection();
-            var sql = @"update conductores set Documento=@Documento,Nombre=@Nombre,disponibilidad=@disponibilidad,placa=@placa,modelo=@modelo,licencia=@licencia,Foto=@Foto, TipoDoc_idTipoDoc=@tipoDoc where idConductores=@Id";
-            var result = await db.ExecuteAsync(sql, new { conductor.documento, conductor.nombre, conductor.disponibilidad, conductor.placa, conductor.modelo, conductor.licencia, conductor.foto, conductor.tipoDoc, conductor.id });
+            var sql = @"update empleado set Nombre=@Nombre, Telefono=@Telefono, CorreoElectronico=@CorreoEectronico";
+            var result = await db.ExecuteAsync(sql, new { empleado.Nombre, empleado.Telefono, empleado.CorreoElectronico });
 
             return result > 0;
 
@@ -59,11 +63,4 @@ namespace data.repositorio
 
     }
 
-    internal class Empleado
-    {
-    }
-
-    internal class Empleado
-    {
-    }
 }
